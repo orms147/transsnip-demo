@@ -308,11 +308,6 @@
         <button class="btn btn-primary btn-lg" id="btn-capture"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.8" y="2.8" width="12.4" height="8.4" rx="1.2"/><path d="M5.5 14h5M8 11.2V14"/></svg>Chụp màn hình</button>
         <button class="btn" id="btn-upload"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><circle cx="5.5" cy="6.5" r="1.1"/><path d="M3 11l3-3 2.5 2.5L11 7l2 2"/></svg>Dùng ảnh mẫu</button>
       </div>
-      <div class="capture-alt">
-        <span>hoặc dán ảnh chụp <kbd>Ctrl</kbd>+<kbd>V</kbd></span>
-        <span class="dotsep"></span>
-        <button class="link-btn" id="go-text">dịch văn bản thuần</button>
-      </div>
     </section>
 
     <section class="workspace hidden" id="workspace">
@@ -475,7 +470,6 @@
       $("swap").addEventListener("click", ()=>{const s=$("source-lang"),t=$("target-lang"); if(s.value==="auto")return; [s.value,t.value]=[t.value,s.value];});
       $("btn-capture").addEventListener("click", ()=>loadScene(0));
       $("btn-upload").addEventListener("click", ()=>loadScene(0));
-      $("go-text").addEventListener("click", ()=>switchView("text"));
       $("text-back").addEventListener("click", ()=>switchView(state.view==="text"&&sceneLoaded?"workspace":"empty"));
       $("ws-recapture").addEventListener("click", ()=>loadScene(sceneIdx+1));
       $("ws-close").addEventListener("click", ()=>{ sceneLoaded=false; dismiss(); switchView("empty"); });
@@ -486,7 +480,6 @@
       ["mouseup","mouseleave"].forEach(ev=>$("ov-source").addEventListener(ev, ()=>$("scene-frame").classList.remove("show-source")));
       $("translate-text").addEventListener("click", doTranslateText);
       $("text-input").addEventListener("input", ()=>{ $("char-count").textContent=$("text-input").value.length+" ký tự"; });
-      window.addEventListener("paste", (e)=>{ const it=[...(e.clipboardData?.items||[])].find(i=>i.type.startsWith("image/")); if(it) loadScene(0); });
       const layer=$("select-layer");
       layer.addEventListener("pointerdown", onDown);
       layer.addEventListener("pointermove", onMove);
